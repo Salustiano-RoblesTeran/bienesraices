@@ -13,7 +13,8 @@ const formularioLogin = (req, res) =>{
 
 const formularioRegistro = (req, res) =>{
     res.render('auth/registro', {
-        pagina: 'Crear Cuenta'
+        pagina: 'Crear Cuenta',
+        csrfToken: req.csrfToken()
     })
 }
 
@@ -32,6 +33,7 @@ const registrar = async (req, res) => {
     if (!resultado.isEmpty()) {
         return res.render('auth/registro', {
             pagina: 'Crear Cuenta',
+            csrfToken: req.csrfToken(),
             errores: resultado.array(),
             usuario: {
                 nombre: req.body.nombre,
@@ -47,6 +49,7 @@ const registrar = async (req, res) => {
     if (password !== repetir_password) {
         return res.render('auth/registro', {
             pagina: 'Crear Cuenta',
+            csrfToken: req.csrfToken(),
             errores: [{ msg: "Las contraseñas no coinciden." }],
             usuario: {
                 nombre: req.body.nombre,
@@ -113,6 +116,15 @@ const confirmar = async (req, res) => {
 
     // Confirmar la cuenta
 
+    usuario.token = null;
+    usuario.confirmado = true;
+    
+    await usuario.save();
+
+    res.render('auth/confirmar-cuenta', {
+        pagina: 'Cuenta Confirmada',
+        mensaje: 'La cuenta fue confirmada con exito!',
+    })
     
 }
 
