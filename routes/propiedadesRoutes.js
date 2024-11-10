@@ -3,12 +3,15 @@ import { body } from 'express-validator'
 
 import { admin, crear, guardar } from "../controllers/propiedadCtrl.js";
 
+import protgerRuta from "../middleware/protegerRuta.js";
+
 const router = express.Router();
 
 
-router.get('/mis-propiedades', admin)
-router.get('/propiedades/crear', crear)
+router.get('/mis-propiedades', protgerRuta, admin)
+router.get('/propiedades/crear', protgerRuta, crear)
 router.post('/propiedades/crear',
+    protgerRuta,
     body('titulo').notEmpty().withMessage('El Titulo del Anuncio es Obligatorio.'),
     body('descripcion').notEmpty().withMessage('La Descripcion No Puede Ir Vacia.').isLength({max: 200}).withMessage('La Descripcion es muy Larga'),
     body('categoria').isNumeric().withMessage('Selecciona una Categoria.'),

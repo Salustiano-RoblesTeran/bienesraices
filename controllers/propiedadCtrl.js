@@ -31,15 +31,16 @@ const crear = async (req, res) => {
 }
 
 const guardar = async (req, res) => {
-    // Validacion
-    let resultado = validationResult(req)
+    // Validación
+    let resultado = validationResult(req);
 
-    if (resultado.isEmpty) {
-        // Modelo de precios y categorias
+    if (!resultado.isEmpty()) {
+        // Modelo de precios y categorías
         const [categorias, precios] = await Promise.all([
             Categoria.findAll(),
             Precio.findAll()
-    ])
+        ]);
+
         return res.render('propiedades/crear', {
             pagina: 'Crear Propiedad',
             barra: true,
@@ -48,17 +49,17 @@ const guardar = async (req, res) => {
             precios,
             errores: resultado.array(),
             datos: req.body
-        })
+        });
     }
 
     // Crear un registro
-
-    const {titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: precioId, categoria: categoriaId } = req.body;
+    const { titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: precioId, categoria: categoriaId } = req.body;
+    const { id: usuarioId } = req.usuario; 
 
     try {
         const propiedadGuardada = await Propiedad.create({
             titulo,
-            descripcion,
+            descripcion,  // Corrige aquí si estaba mal escrito
             habitaciones,
             estacionamiento, 
             wc,
@@ -66,15 +67,18 @@ const guardar = async (req, res) => {
             lat,
             lng,
             precioId,
-            categoriaId
+            categoriaId,
+            usuarioId,
+            imagen: ''
+        });
 
-        })
-
-    } catch(error) {
-        console.log(error)
+        const { id } = propiedadGuardada;
+        res.redirect(`/propiedades/agregar-imagen/${id}`);
+    } catch (error) {
+        console.log(error);
     }
+};
 
-}
 
 
 export {
