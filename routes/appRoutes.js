@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { inicio, categoria, noEncontrado, buscador } from '../controllers/appController.js'
+import { inicio, categoria, noEncontrado, buscador } from '../controllers/appCtrl.js'
  
 const router = express.Router();
 
