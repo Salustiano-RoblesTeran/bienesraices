@@ -1,7 +1,9 @@
 import { validationResult } from 'express-validator'
 import { unlink } from 'node:fs/promises'
 
-import {Precio, Categoria, Propiedad} from '../models/index.js'
+import {Precio, Categoria, Propiedad, Mensaje} from '../models/index.js'
+
+import { esVendedor } from '../helpers/index.js'
 
 
 
@@ -338,12 +340,60 @@ const mostrarPropiedad = async (req, res) => {
     if (!propiedad) {
         return res.redirect('/404')
     }
+    
 
     res.render('propiedades/mostrar', {
         propiedad,
         pagina: propiedad.titulo,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        usuario: req.usuario,
+        esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
     })
+}
+
+const enviarMensaje = async (req, res) => {
+    const { id } = req.params;
+
+    // Comprobar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id, {
+        include: [
+            { model: Precio, as: 'precio'},
+            { model: Categoria, as: 'categoria'},
+        ]
+    });
+
+    if (!propiedad) {
+        return res.redirect('/404')
+    }
+
+    // Renderizar los errores
+        // Validación
+        let resultado = validationResult(req);
+
+        if (!resultado.isEmpty()) {
+            return res.render('propiedades/mostrar', {
+                propiedad,
+                pagina: propiedad.titulo,
+                csrfToken:req.csrfToken(),
+                usuario: req.usuario,
+                esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+                errores: resultado.array()
+            })
+        }
+
+        const { mensaje } = req.body;
+        const { id: propiedadId } = req.params;
+        const { id: usuarioId } = req.usuario;
+
+        // Almacenar el mensaje
+        await Mensaje.create({
+            mensaje,
+            propiedadId,
+            usuarioId
+        })
+    
+
+    res.redirect('/')
 }
 
 export {
@@ -355,5 +405,6 @@ export {
     editar,
     guardarCambios,
     eliminar,
-    mostrarPropiedad
+    mostrarPropiedad,
+    enviarMensaje
 }
