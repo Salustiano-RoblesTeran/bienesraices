@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from 'express-validator'
 
-import { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje } from "../controllers/propiedadCtrl.js";
+import { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje, verMensajes } from "../controllers/propiedadCtrl.js";
 
 import protegerRuta from "../middleware/protegerRuta.js";
 
@@ -72,5 +72,11 @@ router.post('/propiedad/:id',
     body('mensaje').isLength({min: 10}).withMessage('El mensaje no puede ir vacio o es muy corto'),
     enviarMensaje
 )
+
+router.get('/mensajes/:id',
+    protegerRuta,
+    verMensajes
+)
+
 
 export default router;
