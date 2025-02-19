@@ -2,21 +2,12 @@
 
 Este software proporciona una plataforma integral para la gestión de propiedades de bienes raíces, permitiendo a los usuarios publicar y buscar propiedades en diversas categorías. La aplicación está diseñada para facilitar la compra, venta y alquiler de inmuebles, ofreciendo una experiencia interactiva y fácil de usar.
 
----
-
-## 🛠️ Despliegue
-El sistema está desplegado en **Render**.
-
-## ⚠️ Importante
-La primera solicitud puede tardar un poco más en responder, ya que está alojado en Render con un plan gratuito. 
-
-⏳ **¡Gracias por tu paciencia!** 😄
 
 ---
 
 ## 🌟 Características
 
-### 💪 Funcionalidades para Usuario
+### 💪 Funcionalidades para Usuarios
 
 #### 📊 Operaciones CRUD:
 - Panel de control con resumen de publicaciones, solicitudes de contacto y actualizaciones de propiedades.
@@ -25,20 +16,36 @@ La primera solicitud puede tardar un poco más en responder, ya que está alojad
 - Crear, actualizar y eliminar propiedades en distintas categorías: Casas, Departamentos, Comercios, Terrenos y Cabañas.
 
 #### 🏙️ Visualización en Mapa:
-- Administradores pueden verificar y modificar la ubicación de las propiedades en un mapa interactivo.
+- Tiene un mapa donde se pueden ver las propiedades de la zona. Tambien tiene filtros como categorias y rangos de precios.
 
 ---
 
-### 👤 Funcionalidades para Usuarios no Logueados
+### 👤 Funcionalidades para Usuarios No Logueados
 
 #### 🔍 Exploración de Propiedades:
-- Los usuarios pueden buscar propiedades filtrando por categoría y ubicación.
+- Los usuarios pueden buscar propiedades filtrando por categoría y ubicación. También cuenta con un mapa donde pueden ver las propiedades.
 
-#### 🌏 Mapa Interactivo:
-- Visualización de propiedades en un mapa, facilitando la búsqueda de inmuebles por ubicación.
+![Home](/public/assets/img/home.png)
 
-#### 📩 Contacto Directo (deben loguearse):
+#### 🌏 Ver Propiedades:
+- Los usuarios que no estén logueados pueden acceder a las propiedades para ver más información sobre las mismas.
+
+![Propiedad](/public/assets/img/propiedadSinLog.png)
+
+#### 📩 Contacto Directo (requiere inicio de sesión):
 - Los usuarios pueden contactar al vendedor mediante un formulario integrado en cada publicación.
+
+![Usuario Logueado](/public/assets/img/propiedadConLog.png)
+
+### 📝 Publicación de Propiedades (requiere inicio de sesión):
+- Los usuarios pueden publicar propiedades.
+
+![Publicar Propiedad](/public/assets/img/publicar.png)
+
+### 📈 Panel de Control (requiere inicio de sesión):
+- Los usuarios logueados pueden administrar sus propiedades (publicarlas, editarlas, eliminarlas).
+
+![Dashboard](/public/assets/img/dashboard.png)
 
 ---
 
@@ -90,22 +97,16 @@ Elimina datos de la base de datos.
 ---
 
 ## 🛠️ Contribuciones
-Si deseas contribuir al proyecto, no dudes en enviar un **pull request** o reportar problemas en el repositorio. 
+Si deseas contribuir al proyecto, no dudes en enviar un **pull request** o reportar problemas en el repositorio.
 
 ---
 
-Gracias por tu interés en el **Real Estate Property Management System**. 
-
-✨ **Facilitando la compra, venta y alquiler de propiedades.** ✨
+🌟 **Facilitando la compra, venta y alquiler de propiedades.** 🌟
 
 ---
 
-📞 Contacto
+## 📞 Contacto
 
-Desarrollador: Salustiano Robles Terán
-Email: saluroblesteran@gmail.com
-Web: saluroblesteran.com
-
-Gracias por tu interés en el Real Estate Property Management System.
-
-✨ Facilitando la compra, venta y alquiler de propiedades. ✨
+**Desarrollador:** Salustiano Robles Terán  
+📧 [saluroblesteran@gmail.com](mailto:saluroblesteran@gmail.com)  
+🌐 [saluroblesteran.com](https://saluroblesteran.com)
